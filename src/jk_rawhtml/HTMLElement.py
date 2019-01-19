@@ -17,6 +17,16 @@ class HTMLElement(object):
 		self._proto = proto
 	#
 
+	def addAttributes(self, **kwargs):
+		self.attributes.update(kwargs)
+		return self
+	#
+
+	def addChildren(self, *args):
+		self.children.extend(args)
+		return self
+	#
+
 	def __call__(self, **attrs):
 		assert not self.attributes
 		self.attributes.update(attrs)
@@ -48,14 +58,14 @@ class HTMLElement(object):
 			else:
 				if isinstance(v, (int, float)):
 					ret.extend((" ", k, "=\"", str(v), "\""))
-				if isinstance(v, str):
+				elif isinstance(v, str):
 					ret.extend((" ", k, "=\"", htmlEscape(v), "\""))
 				else:
 					raise Exception("Unexpected attribute value type: " + str(type(v)))
 	#
 
 	def _closingTagData(self):
-		return [ "<", self.name, "/>" ]
+		return [ "</", self.name, ">" ]
 	#
 
 	def __str__(self):
