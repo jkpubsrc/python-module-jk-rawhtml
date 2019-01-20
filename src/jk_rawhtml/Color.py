@@ -9,6 +9,14 @@ class Color(object):
 		self.b = b
 	#
 
+	def __repr__(self):
+		return "Color(%0.2f, %0.2f, %0.2f)" % (self.r, self.g, self.b)
+	#
+
+	def __str__(self):
+		return "Color(%0.2f, %0.2f, %0.2f)" % (self.r, self.g, self.b)
+	#
+
 	def toHTML(self):
 		r, g, b = self.toRGB()
 		return "#%0.2x%0.2x%0.2x" % (r, g, b)

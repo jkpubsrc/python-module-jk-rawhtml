@@ -6,6 +6,7 @@ from .htmlgeneral import *
 from ._HTMLElementProto import _HTMLElementProto, HTMLElement
 from ._HTMLCommentProto import _HTMLCommentProto, HTMLComment
 from ._HTMLRawTextProto import _HTMLRawTextProto, HTMLRawText
+from ._HTMLRawCSSProto import _HTMLRawCSSProto, HTMLRawCSS
 from .HTML5RootElement import HTML5RootElement
 from .HTML5HeadElement import HTML5HeadElement
 
@@ -135,6 +136,8 @@ class HTML5Scope(object):
 	comment = _HTMLCommentProto()
 
 	raw_html = _HTMLRawTextProto()
+
+	raw_style_css = _HTMLRawCSSProto()
 
 #
 

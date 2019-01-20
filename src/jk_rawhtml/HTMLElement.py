@@ -17,19 +17,34 @@ class HTMLElement(object):
 		self._proto = proto
 	#
 
-	def addAttributes(self, **kwargs):
-		self.attributes.update(kwargs)
+	def addAttributes(self, **attrs):
+		for k, v in attrs.items():
+			if k.startswith("_"):
+				self.attributes[k[1:]] = v
+			else:
+				self.attributes[k] = v
 		return self
 	#
 
-	def addChildren(self, *args):
+	def addContent(self, *args):
 		self.children.extend(args)
 		return self
 	#
 
+	"""
+	def addChildren(self, *args):
+		self.children.extend(args)
+		return self
+	#
+	"""
+
 	def __call__(self, **attrs):
 		assert not self.attributes
-		self.attributes.update(attrs)
+		for k, v in attrs.items():
+			if k.startswith("_"):
+				self.attributes[k[1:]] = v
+			else:
+				self.attributes[k] = v
 		return self
 	#
 
@@ -51,17 +66,22 @@ class HTMLElement(object):
 	def _attrsToStr(self, ret:list):
 		for k, v in self.attributes.items():
 			if k == "style":
-				if isinstance(v, CSSMap):
-					ret.extend((" style=\"", str(v), "\""))
+				if isinstance(v, str):
+					v = v.strip()
+					if v:
+						ret.extend((" style=\"", v, "\""))
+				elif isinstance(v, CSSMap):
+					if v:
+						ret.extend((" style=\"", str(v), "\""))
 				else:
-					raise Exception("Unexpected attribute value type: " + str(type(v)))
+					raise Exception("Unexpected value specified for HTML tag attribute '" + k + "': type " + str(type(v)) + ", value " + repr(v))
 			else:
 				if isinstance(v, (int, float)):
 					ret.extend((" ", k, "=\"", str(v), "\""))
 				elif isinstance(v, str):
 					ret.extend((" ", k, "=\"", htmlEscape(v), "\""))
 				else:
-					raise Exception("Unexpected attribute value type: " + str(type(v)))
+					raise Exception("Unexpected value specified for HTML tag attribute '" + k + "': type " + str(type(v)) + ", value " + repr(v))
 	#
 
 	def _closingTagData(self):
@@ -107,45 +127,6 @@ class HTMLElement(object):
 		if self._proto.bLineBreakOuter:
 			outputBuffer.newLine()
 	#
-
-	"""
-	def _serialize(self, indent:str, outputBuffer:OutputBuffer):
-		if self._proto.bLineBreakOuter:
-			outputBuffer.newLine()
-			outputBuffer.write(indent)
-		outputBuffer.write(self._openingTagData())
-
-		if self._proto.bHasClosingTag:
-			indent2 = indent + "\t"
-			if self._proto.bLineBreakInner:
-				if self.children:
-					outputBuffer.newLine()
-					for child in self.children:
-						if isinstance(child, (int, float, str)):
-							if outputBuffer.bufferIsEmpty():
-								outputBuffer.write(indent2)
-							outputBuffer.write(htmlEscape(str(child)))
-						else:
-							child._serialize(indent2, outputBuffer)
-					outputBuffer.newLine()
-					outputBuffer.write(indent)
-			else:
-				for child in self.children:
-					if isinstance(child, (int, float, str)):
-						outputBuffer.write(htmlEscape(str(child)))
-					else:
-						child._serialize(indent2, outputBuffer)
-
-			outputBuffer.write(self._closingTagData())
-
-		else:
-			if len(self.children) > 0:
-				raise Exception("HTML tag \"" + self.name + "\" is not allowed to have child elements!")
-
-		if self._proto.bLineBreakOuter:
-			outputBuffer.newLine()
-	#
-	"""
 
 #
 
