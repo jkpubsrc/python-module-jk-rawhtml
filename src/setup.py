@@ -7,13 +7,13 @@ def readme():
 
 
 setup(name="jk_rawhtml",
-	version="0.2019.1.20",
+	version="0.2019.1.22",
 	description="This python module provides support for programmatically generating HTML5 code.",
 	author="Jürgen Knauth",
 	author_email="pubsrc@binary-overflow.de",
 	license="Apache 2.0",
 	url="https://github.com/jkpubsrc/python-module-jk-rawhtml",
-	download_url="https://github.com/jkpubsrc/python-module-jk-rawhtml/tarball/0.2019.1.20",
+	download_url="https://github.com/jkpubsrc/python-module-jk-rawhtml/tarball/0.2019.1.22",
 	keywords=[
 		"html",
 		"css",

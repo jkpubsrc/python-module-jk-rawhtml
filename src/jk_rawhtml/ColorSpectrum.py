@@ -20,9 +20,15 @@ class ColorSpectrum(list):
 				self.append(c)
 	#
 
-	def getColor(self, f:float):
-		if (f < 0) or (f > 1):
-			raise Exception("Invalid value specified: " + repr(f))
+	def getColor(self, f:float, bRaiseExceptionOnInvalidValue:bool = False):
+		if bRaiseExceptionOnInvalidValue:
+			if (f < 0) or (f > 1):
+				raise Exception("Invalid value specified: " + repr(f))
+		else:
+			if f < 0:
+				f = 0
+			elif f > 1:
+				f = 1
 
 		if len(self) == 0:
 			return Color.BLACK
