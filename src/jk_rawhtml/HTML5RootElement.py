@@ -1,6 +1,8 @@
 
 
 
+from jk_hwriter import HWriter
+
 from .HTMLElement import *
 from .HTML5HeadElement import HTML5HeadElement
 
@@ -31,32 +33,32 @@ class HTML5RootElement(HTMLElement):
 		return False
 	#
 
-	def _serialize(self, outputBuffer:OutputBuffer):
-		outputBuffer.write(self._openingTagData())
+	def _serialize(self, w:HWriter):
+		w.write(self._openingTagData())
 
 		if self._proto.bHasClosingTag:
-			outputBuffer.incrementIndent()
+			w.incrementIndent()
 
 			if self.children:
-				outputBuffer.newLine()
+				w.lineBreak()
 				if not self.__hasHeadTag():
 					head = HTML5HeadElement(self._proto, "head")
-					head._serialize(outputBuffer)
+					head._serialize(w)
 				for child in self.children:
 					if isinstance(child, (int, float, str)):
-						outputBuffer.write(htmlEscape(str(child)))
+						w.write(htmlEscape(str(child)))
 					else:
-						child._serialize(outputBuffer)
-				outputBuffer.newLine()
+						child._serialize(w)
+				w.lineBreak()
 
-			outputBuffer.decrementIndent()
-			outputBuffer.write(self._closingTagData())
+			w.decrementIndent()
+			w.write(self._closingTagData())
 
 		else:
 			if len(self.children) > 0:
 				raise Exception("HTML tag \"" + self.name + "\" is not allowed to have child elements!")
 
-		outputBuffer.newLine()
+		w.lineBreak()
 	#
 
 #

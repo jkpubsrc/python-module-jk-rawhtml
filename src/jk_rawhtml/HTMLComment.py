@@ -1,7 +1,8 @@
 
 
+from jk_hwriter import HWriter
+
 from .htmlgeneral import *
-from .OutputBuffer import OutputBuffer
 
 
 
@@ -29,22 +30,21 @@ class HTMLComment(object):
 		return self
 	#
 
-	def _serialize(self, outputBuffer:OutputBuffer):
+	def _serialize(self, w:HWriter):
 		if self.texts1:
-			outputBuffer.newLine()
-		outputBuffer.write("<!-- ")
+			w.lineBreak()
+		w.write("<!-- ")
 		if self.texts1:
 			for text in self.texts1:
-				outputBuffer.newLine()
-				outputBuffer.write(text.replace("-->", "--&gt;"))
-				outputBuffer.newLine()
+				w.lineBreak()
+				w.writeLn(text.replace("-->", "--&gt;"))
 		for text in self.texts2:
-			outputBuffer.write(text.replace("-->", "--&gt;"))
+			w.write(text.replace("-->", "--&gt;"))
 		if self.texts1:
-			outputBuffer.newLine()
-		outputBuffer.write("-->")
+			w.lineBreak()
+		w.write("-->")
 		if self.texts1:
-			outputBuffer.newLine()
+			w.lineBreak()
 	#
 
 #

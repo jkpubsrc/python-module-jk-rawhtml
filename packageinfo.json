@@ -1,0 +1,44 @@
+{
+	"language": "python3",
+	"name": "jk_rawhtml",
+	"version": "0.2019.9.11",
+	"meta": {
+		"description": "This python module provides support for programmatically generating HTML5 code.",
+		"keywords": [
+			"html",
+			"css",
+			"html5"
+		],
+		"license": "Apache 2.0",
+		"development_status": "beta",
+		"authors": [
+			{
+				"name": "Jürgen Knauth",
+				"email": "pubsrc@binary-overflow.de"
+			}
+		],
+		"wiki": {
+			"page": "DevDocs:jk_rawhtml"
+		}
+	},
+	"repositories": [
+		{
+			"type": "github",
+			"user": "jkpubsrc",
+			"project": "python-module-jk-rawhtml"
+		}
+	],
+	"source": {
+		"packages": [
+			"jk_rawhtml"
+		],
+		"extra_data_files": [
+		]
+	},
+	"requirements": {
+		"python_packages": [
+			"jk_hwriter"
+		]
+	}
+}
+

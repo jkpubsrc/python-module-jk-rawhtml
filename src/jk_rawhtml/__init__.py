@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+﻿#!/usr/bin/python3
 
 
 from .Color import Color
@@ -13,8 +13,6 @@ from .HTML5Scope import HTML5Scope
 
 
 
-__version__ = "0.2019.1.22"
-
-
+__version__ = "0.2019.9.11"
 
 

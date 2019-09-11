@@ -1,7 +1,8 @@
 
 
+from jk_hwriter import HWriter
+
 from .htmlgeneral import *
-from .OutputBuffer import OutputBuffer
 
 
 
@@ -28,15 +29,15 @@ class HTMLRawCSS(object):
 		return self
 	#
 
-	def _serialize(self, outputBuffer:OutputBuffer):
+	def _serialize(self, w:HWriter):
 		if self.texts:
-			outputBuffer.newLine()
-			outputBuffer.writeLn("<style type=\"text/css\">")
-			outputBuffer.incrementIndent()
+			w.lineBreak()
+			w.writeLn("<style type=\"text/css\">")
+			w.incrementIndent()
 			for text in self.texts:
-				outputBuffer.writeLn(text)
-			outputBuffer.decrementIndent()
-			outputBuffer.writeLn("</style>")
+				w.writeLn(text)
+			w.decrementIndent()
+			w.writeLn("</style>")
 	#
 
 #

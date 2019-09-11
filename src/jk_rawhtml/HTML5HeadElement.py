@@ -1,6 +1,8 @@
 
 
 
+from jk_hwriter import HWriter
+
 from .HTMLElement import *
 
 
@@ -22,32 +24,32 @@ class HTML5HeadElement(HTMLElement):
 		return False
 	#
 
-	def _serialize(self, outputBuffer:OutputBuffer):
-		outputBuffer.write(self._openingTagData())
+	def _serialize(self, w:HWriter):
+		w.write(self._openingTagData())
 
 		if self._proto.bHasClosingTag:
-			outputBuffer.incrementIndent()
+			w.incrementIndent()
 
 			bRequireExtraCharsetTag = not self.__hasMetaTagWithCharset()
 			if self.children or bRequireExtraCharsetTag:
-				outputBuffer.newLine()
+				w.lineBreak()
 				if bRequireExtraCharsetTag:
-					outputBuffer.writeLn("<meta charset=\"UTF-8\">")
+					w.writeLn("<meta charset=\"UTF-8\">")
 				for child in self.children:
 					if isinstance(child, (int, float, str)):
-						outputBuffer.write(htmlEscape(str(child)))
+						w.write(htmlEscape(str(child)))
 					else:
-						child._serialize(outputBuffer)
-				outputBuffer.newLine()
+						child._serialize(w)
+				w.lineBreak()
 
-			outputBuffer.decrementIndent()
-			outputBuffer.write(self._closingTagData())
+			w.decrementIndent()
+			w.write(self._closingTagData())
 
 		else:
 			if len(self.children) > 0:
 				raise Exception("HTML tag \"" + self.name + "\" is not allowed to have child elements!")
 
-		outputBuffer.newLine()
+		w.lineBreak()
 	#
 
 #

@@ -1,7 +1,8 @@
 
 
+from jk_hwriter import HWriter
+
 from .htmlgeneral import *
-from .OutputBuffer import OutputBuffer
 
 
 
@@ -29,14 +30,14 @@ class HTMLRawText(object):
 		return self
 	#
 
-	def _serialize(self, outputBuffer:OutputBuffer):
+	def _serialize(self, w:HWriter):
 		if self.texts1:
 			for text in self.texts1:
-				outputBuffer.newLine()
-				outputBuffer.write(htmlEscape(text))
-				outputBuffer.newLine()
+				w.lineBreak()
+				w.write(text)
+				w.lineBreak()
 		for text in self.texts2:
-			outputBuffer.write(htmlEscape(text))
+			w.write(text)
 	#
 
 #

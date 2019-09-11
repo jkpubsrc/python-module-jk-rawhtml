@@ -1,7 +1,8 @@
 
 
 
-from .OutputBuffer import OutputBuffer
+from jk_hwriter import HWriter
+
 from .htmlgeneral import *
 from .CSSMap import CSSMap
 
@@ -50,7 +51,15 @@ class HTMLElement(object):
 
 	def __getitem__(self, childOrChildren):
 		if hasattr(type(childOrChildren), "__iter__"):
-			self.children.extend(childOrChildren)
+			for c1 in childOrChildren:
+				if hasattr(type(c1), "__iter__"):
+					for c2 in c1:
+						if hasattr(type(c2), "__iter__"):
+							self.children.extend(c2)
+						else:
+							self.children.append(c2)
+				else:
+					self.children.append(c1)
 		else:
 			self.children.append(childOrChildren)
 		return self
@@ -89,43 +98,43 @@ class HTMLElement(object):
 	#
 
 	def __str__(self):
-		buf = OutputBuffer()
-		self._serialize(buf)
-		return str(buf)
+		w = HWriter()
+		self._serialize(w)
+		return str(w)
 	#
 
-	def _serialize(self, outputBuffer:OutputBuffer):
+	def _serialize(self, w:HWriter):
 		if self._proto.bLineBreakOuter:
-			outputBuffer.newLine()
-		outputBuffer.write(self._openingTagData())
+			w.lineBreak()
+		w.write(self._openingTagData())
 
 		if self._proto.bHasClosingTag:
-			outputBuffer.incrementIndent()
+			w.incrementIndent()
 			if self._proto.bLineBreakInner:
 				if self.children:
-					outputBuffer.newLine()
+					w.lineBreak()
 					for child in self.children:
 						if isinstance(child, (int, float, str)):
-							outputBuffer.write(htmlEscape(str(child)))
+							w.write(htmlEscape(str(child)))
 						else:
-							child._serialize(outputBuffer)
-					outputBuffer.newLine()
+							child._serialize(w)
+					w.lineBreak()
 			else:
 				for child in self.children:
 					if isinstance(child, (int, float, str)):
-						outputBuffer.write(htmlEscape(str(child)))
+						w.write(htmlEscape(str(child)))
 					else:
-						child._serialize(outputBuffer)
+						child._serialize(w)
 
-			outputBuffer.decrementIndent()
-			outputBuffer.write(self._closingTagData())
+			w.decrementIndent()
+			w.write(self._closingTagData())
 
 		else:
 			if len(self.children) > 0:
 				raise Exception("HTML tag \"" + self.name + "\" is not allowed to have child elements!")
 
 		if self._proto.bLineBreakOuter:
-			outputBuffer.newLine()
+			w.lineBreak()
 	#
 
 #
