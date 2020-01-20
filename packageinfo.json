@@ -25,7 +25,13 @@
 		{
 			"type": "github",
 			"user": "jkpubsrc",
-			"project": "python-module-jk-rawhtml"
+			"project": "python-module-jk-rawhtml",
+			"devon_publish": true
+		},
+		{
+			"type": "pypy",
+			"project": "jk_rawhtml",
+			"devon_publish": true
 		}
 	],
 	"source": {
@@ -33,11 +39,15 @@
 			"jk_rawhtml"
 		],
 		"extra_data_files": [
+		],
+		"extra_binary_files": [
 		]
 	},
 	"requirements": {
 		"python_packages": [
 			"jk_hwriter"
+		],
+		"python_packages_dev": [
 		]
 	}
 }
