@@ -13,6 +13,6 @@ from .HTML5Scope import HTML5Scope
 
 
 
-__version__ = "0.2019.9.11"
+__version__ = "0.2020.9.21"
 
 

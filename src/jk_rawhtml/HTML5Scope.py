@@ -82,6 +82,7 @@ class HTML5Scope(object):
 	menuitem = _HTMLElementProto("menuitem", tagType=HTML_TAG_TYPE_INLINE_CONTENT)
 	meta = _HTMLElementProto("meta", bHasClosingTag=False, tagType=HTML_TAG_TYPE_INLINE_CONTENT)
 	meter = _HTMLElementProto("meter", tagType=HTML_TAG_TYPE_INLINE_ALL)
+	nav = _HTMLElementProto("nav", tagType=HTML_TAG_TYPE_STRUCTURE)
 	_object = _HTMLElementProto("object", tagType=HTML_TAG_TYPE_STRUCTURE)		# problem
 	ol = _HTMLElementProto("ol", tagType=HTML_TAG_TYPE_STRUCTURE)
 	optgroup = _HTMLElementProto("optgroup", tagType=HTML_TAG_TYPE_STRUCTURE)
@@ -112,7 +113,7 @@ class HTML5Scope(object):
 	tbody = _HTMLElementProto("tbody", tagType=HTML_TAG_TYPE_STRUCTURE)
 	td = _HTMLElementProto("td", tagType=HTML_TAG_TYPE_STRUCTURE)
 	tfoot = _HTMLElementProto("tfoot", tagType=HTML_TAG_TYPE_STRUCTURE)
-	th = _HTMLElementProto("td", tagType=HTML_TAG_TYPE_STRUCTURE)
+	th = _HTMLElementProto("th", tagType=HTML_TAG_TYPE_STRUCTURE)
 	thead = _HTMLElementProto("thead", tagType=HTML_TAG_TYPE_STRUCTURE)
 	time = _HTMLElementProto("time", tagType=HTML_TAG_TYPE_INLINE_ALL)
 	title = _HTMLElementProto("title", tagType=HTML_TAG_TYPE_INLINE_CONTENT)

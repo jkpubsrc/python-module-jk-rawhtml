@@ -23,7 +23,7 @@ setup(
 		"License :: OSI Approved :: Apache Software License",
 	],
 	description = "This python module provides support for programmatically generating HTML5 code.",
-	download_url = "https://github.com/jkpubsrc/python-module-jk-rawhtml/tarball/0.2019.9.11",
+	download_url = "https://github.com/jkpubsrc/python-module-jk-rawhtml/tarball/0.2020.8.16",
 	include_package_data = False,
 	install_requires = [
 		"jk_hwriter",
@@ -39,7 +39,7 @@ setup(
 		"jk_rawhtml",
 	],
 	url = "https://github.com/jkpubsrc/python-module-jk-rawhtml",
-	version = "0.2019.9.11",
+	version = "0.2020.9.21",
 	zip_safe = False,
 	long_description = readme(),
 	long_description_content_type="text/markdown",
