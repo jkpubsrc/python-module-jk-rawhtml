@@ -16,7 +16,7 @@ class HTMLRawCSS(object):
 			self.texts = list(textOrTextList)
 	#
 
-	def __call__(self, **attrs):
+	def __call__(self, *attrs):
 		self.texts.append("".join(attrs))
 		return self
 	#

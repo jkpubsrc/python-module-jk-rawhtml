@@ -21,26 +21,32 @@ setup(
 	classifiers = [
 		"Development Status :: 4 - Beta",
 		"License :: OSI Approved :: Apache Software License",
+		"Programming Language :: Python :: 3",
 	],
 	description = "This python module provides support for programmatically generating HTML5 code.",
-	download_url = "https://github.com/jkpubsrc/python-module-jk-rawhtml/tarball/0.2020.8.16",
-	include_package_data = False,
+	include_package_data = True,
 	install_requires = [
 		"jk_hwriter",
+		"jk_prettyprintobj",
 	],
 	keywords = [
 		"html",
 		"css",
 		"html5",
 	],
-	license = "Apache 2.0",
+	license = "Apache2",
 	name = "jk_rawhtml",
+	package_data = {
+		"": [
+		],
+	},
 	packages = [
 		"jk_rawhtml",
 	],
-	url = "https://github.com/jkpubsrc/python-module-jk-rawhtml",
-	version = "0.2020.9.21",
+	scripts = [
+	],
+	version = '0.2023.6.26',
 	zip_safe = False,
 	long_description = readme(),
-	long_description_content_type="text/markdown",
+	long_description_content_type = "text/markdown",
 )

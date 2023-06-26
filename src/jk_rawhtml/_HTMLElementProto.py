@@ -1,16 +1,29 @@
 
 
+import typing
+
+import jk_prettyprintobj
+
 from .HTMLElement import HTMLElement
 from .htmlgeneral import *
 
 
 
 
-class _HTMLElementProto(object):
+class _HTMLElementProto(jk_prettyprintobj.DumpMixin):
 
-	def __init__(self, name:str, bHasClosingTag=True, tagType=HTML_TAG_TYPE_INLINE_CONTENT, implClass=HTMLElement, extraAttributes:dict=None):
+
+	################################################################################################################################
+	## Constructor
+	################################################################################################################################
+
+	#
+	# Constructor method.
+	#
+	def __init__(self, name:str, bHasClosingTag=HTML_CLOSING_TAG_ALWAYS, tagType=HTML_TAG_TYPE_INLINE_CONTENT, implClass=HTMLElement, extraAttributes:dict=None):
 		assert isinstance(name, str)
-		assert isinstance(bHasClosingTag, bool)
+		if bHasClosingTag is not None:
+			assert isinstance(bHasClosingTag, bool)
 
 		self.name = name
 		self.bHasClosingTag = bHasClosingTag
@@ -36,7 +49,31 @@ class _HTMLElementProto(object):
 			self.extraAttributes = None
 	#
 
-	def __call__(self, *args, **attrs):
+	################################################################################################################################
+	## Public Properties
+	################################################################################################################################
+
+	################################################################################################################################
+	## Helper Methods
+	################################################################################################################################
+
+	def _dumpVarNames(self) -> typing.List[str]:
+		return [
+			"name",
+			"bHasClosingTag",
+			"tagType",
+			"implClass",
+			"bLineBreakOuter",
+			"bLineBreakInner",
+			"extraAttributes",
+		]
+	#
+
+	################################################################################################################################
+	## Public Methods
+	################################################################################################################################
+
+	def __call__(self, *args, **attrs) -> HTMLElement:
 		if self.extraAttributes:
 			d = dict(self.extraAttributes)
 			d.update(attrs)
@@ -50,6 +87,10 @@ class _HTMLElementProto(object):
 	#
 
 #
+
+
+
+
 
 
 

@@ -6,4 +6,5 @@ examples/__pycache__/
 .svn/
 .vscode
 examples/*.log
-src/__OLD/
+**/__OLD/
+*.bak

@@ -1,0 +1,43 @@
+{
+	"magic": {
+		"magic": "packageinfo",
+		"version": 2
+	},
+	"meta": {
+		"authors": [
+			{
+				"email": "pubsrc@binary-overflow.de",
+				"name": "J\u00fcrgen Knauth"
+			}
+		],
+		"description": "This python module provides support for programmatically generating HTML5 code.",
+		"development_status": "beta",
+		"keywords": [
+			"html",
+			"css",
+			"html5"
+		],
+		"language": "python3",
+		"license": "Apache2",
+		"name": "jk_rawhtml",
+		"packageClass": "python-module",
+		"version": "0.2023.6.26"
+	},
+	"requirements": {
+		"htmlcssjs_packages": [],
+		"python_packages": [
+			"jk_hwriter",
+			"jk_prettyprintobj"
+		],
+		"python_packages_dev": [],
+		"python_packages_recommended": [],
+		"system_apt_packages": []
+	},
+	"source": {
+		"extra_binary_files": [],
+		"extra_data_files": [],
+		"packages": [
+			"jk_rawhtml"
+		]
+	}
+}

@@ -1,17 +1,51 @@
 
 
 
-from .Color import Color
-
 
 
 
 class CSSMap(object):
 
-	def __init__(self, *args, **kwargs):
+	################################################################################################################################
+	## Constructor Method
+	################################################################################################################################
+
+	def __init__(self, **kwargs):
 		for k, v in kwargs.items():
 			setattr(self, k, v)
 	#
+
+	################################################################################################################################
+	## Public Properties
+	################################################################################################################################
+
+	################################################################################################################################
+	## Helper Methods
+	################################################################################################################################
+
+	def __toStrE(self, k, v):
+		if isinstance(v, (int, float)):
+			return str(v)
+
+		if isinstance(v, str):
+			return v
+
+		if hasattr(v, "toHTMLCSS"):
+			m = getattr(v, "toHTMLCSS")
+			if callable(m):
+				return m()
+
+		if hasattr(v, "toHTML"):
+			m = getattr(v, "toHTML")
+			if callable(m):
+				return m()
+
+		raise Exception("Unexpected value type specified for CSS attribute '" + k + "': type " + str(type(v)) + ", value " + repr(v))
+	#
+
+	################################################################################################################################
+	## Public Methods
+	################################################################################################################################
 
 	def __bool__(self):
 		for k in dir(self):
@@ -26,6 +60,8 @@ class CSSMap(object):
 		for k in dir(self):
 			if k.startswith("__"):
 				continue
+			if k.startswith("_CSSMap__"):
+				continue
 
 			if len(ret) > 0:
 				ret.append(" ")
@@ -34,14 +70,8 @@ class CSSMap(object):
 			ret.append(":")
 
 			v = getattr(self, k)
-			if isinstance(v, Color):
-				ret.append(v.toHTML())
-			elif isinstance(v, (int, float)):
-				ret.append(str(v))
-			elif isinstance(v, str):
-				ret.append(v)
-			else:
-				raise Exception("Unexpected value type specified for CSS attribute '" + k + "': type " + str(type(v)) + ", value " + repr(v))
+			ret.append(self.__toStrE(k, v))
+				
 			ret.append(";")
 		return "".join(ret)
 	#

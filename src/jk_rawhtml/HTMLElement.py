@@ -9,13 +9,14 @@ from .CSSMap import CSSMap
 
 
 
+
 class HTMLElement(object):
 
-	def __init__(self, proto, name):
+	def __init__(self, proto, name:str):
 		self.name = name
 		self.attributes = {}
 		self.children = []
-		self._proto = proto
+		self._proto = proto			# this is _HTMLElementProto; we cant's specify this as otherwise we'd create circular dependencies
 	#
 
 	def addAttributes(self, **attrs):
@@ -74,6 +75,9 @@ class HTMLElement(object):
 
 	def _attrsToStr(self, ret:list):
 		for k, v in self.attributes.items():
+			if v is None:
+				continue
+
 			if k == "style":
 				if isinstance(v, str):
 					v = v.strip()
@@ -82,13 +86,36 @@ class HTMLElement(object):
 				elif isinstance(v, CSSMap):
 					if v:
 						ret.extend((" style=\"", str(v), "\""))
+				elif isinstance(v, dict):
+					if v:
+						_ruleset = CSSMap(**v)
+						ret.extend((" style=\"", str(_ruleset), "\""))
 				else:
 					raise Exception("Unexpected value specified for HTML tag attribute '" + k + "': type " + str(type(v)) + ", value " + repr(v))
+
+			elif k == "class":
+				if isinstance(v, str):
+					ret.extend((" ", k, "=\"", htmlEscape(v), "\""))
+				elif isinstance(v, list):
+					_xList = []
+					for x in v:
+						if not x:
+							continue
+						assert isinstance(x, str)
+						if x not in _xList:
+							_xList.append(x)
+					if _xList:
+						ret.extend((" ", k, "=\"", htmlEscape(" ".join(_xList)), "\""))
+				else:
+					raise Exception("Unexpected value specified for HTML tag attribute '" + k + "': type " + str(type(v)) + ", value " + repr(v))
+
 			else:
 				if isinstance(v, (int, float)):
 					ret.extend((" ", k, "=\"", str(v), "\""))
 				elif isinstance(v, str):
 					ret.extend((" ", k, "=\"", htmlEscape(v), "\""))
+				elif v is None:
+					ret.extend((" ", k, "=\"\""))
 				else:
 					raise Exception("Unexpected value specified for HTML tag attribute '" + k + "': type " + str(type(v)) + ", value " + repr(v))
 	#
@@ -108,7 +135,11 @@ class HTMLElement(object):
 			w.lineBreak()
 		w.write(self._openingTagData())
 
-		if self._proto.bHasClosingTag:
+		bHasClosingTag = self._proto.bHasClosingTag
+		if bHasClosingTag is HTML_CLOSING_TAG_MAYBE:
+			bHasClosingTag = len(self.children) > 0
+
+		if bHasClosingTag:
 			w.incrementIndent()
 			if self._proto.bLineBreakInner:
 				if self.children:

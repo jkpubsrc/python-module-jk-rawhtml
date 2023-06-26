@@ -5,14 +5,14 @@ import typing
 import jk_prettyprintobj
 
 from .htmlgeneral import *
-from .HTMLRawText import HTMLRawText
+from .HTMLStyleElement import HTMLStyleElement
 
 
 
 
 
 
-class _HTMLRawTextProto(jk_prettyprintobj.DumpMixin):
+class _HTMLCSSProto(jk_prettyprintobj.DumpMixin):
 
 	################################################################################################################################
 	## Constructor
@@ -21,7 +21,7 @@ class _HTMLRawTextProto(jk_prettyprintobj.DumpMixin):
 	#
 	# Constructor method.
 	#
-	def __init__(self, implClass=HTMLRawText):
+	def __init__(self, implClass=HTMLStyleElement):
 		self.implClass = implClass
 	#
 
@@ -43,12 +43,12 @@ class _HTMLRawTextProto(jk_prettyprintobj.DumpMixin):
 	## Public Methods
 	################################################################################################################################
 
-	def __call__(self, *args, **attrs):
-		return self.implClass(args)()
+	def __call__(self, selectors, **attrs):
+		return self.implClass(selectors, **attrs)
 	#
 
 	def __getitem__(self, children):
-		return self.implClass("".join(children))
+		return self.implClass(children)
 	#
 
 #
