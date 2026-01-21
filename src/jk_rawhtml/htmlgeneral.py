@@ -39,7 +39,7 @@ def _htmlEscape0(text:str):
 def htmlEscape(text:str):
 	n = 0
 	ret = []
-	for m in re.finditer("(&#\d+;)|(&[A-Za-z][A-Za-z0-9]*;)", text):
+	for m in re.finditer(r"(&#\d+;)|(&[A-Za-z][A-Za-z0-9]*;)", text):
 		n2, n3 = m.span()
 		ret.append(_htmlEscape0(text[n:n2]))
 		ret.append(text[n2:n3])
