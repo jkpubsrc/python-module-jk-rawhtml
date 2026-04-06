@@ -8,7 +8,7 @@ This python module provides support for programmatically generating HTML5 code.
 
 Information about this module can be found here:
 
-* [github.org](https://github.com/jkpubsrc/python-module-jk-rawhtml)
+* [github.com](https://github.com/jkpubsrc/python-module-jk-rawhtml)
 * [pypi.python.org](https://pypi.python.org/pypi/jk_rawhtml)
 
 Motivation
