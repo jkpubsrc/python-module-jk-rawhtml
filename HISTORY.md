@@ -12,3 +12,7 @@
 * 2026-01-20:
 	* Migrated to TOML file
 
+* 2026-11-01:
+	* Improved: README
+	* Fixed: Dependencies
+

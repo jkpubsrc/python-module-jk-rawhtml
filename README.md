@@ -114,19 +114,19 @@ During creating of HTML tag objects two kinds of conventions are used:
 
 Examples:
 
-| Example			| Comment		|
-|-------------------|---------------|
-| `H.a(href="http://example.org")`	| Create a link tag referring to `http://example.org`	|
-| `H.a(href="http://example.org")["Test"]`	| Create a link tag referring to `http://example.org` and text `Test`	|
-| `H.a["Test"]`	| Create a link tag with text "`Test`"	|
-| `H.a()["Test"]`	| Create a link tag with text "`Test`"	|
-| `H.a()[]`	| Invalid	|
-| `H.a()["A ", "great ", "web ", "site"]`	| Create a link tag with text "`A great web site`". (Components are simply concatenated.)	|
-| `H.a()["A ", H.b["great"], " web site"]`	| Create a link tag with text "`A great web site`" where "`great`" is enclosed in a `b`-tag.	|
-| `H.ol[ H.li[ "Item A" ], H.li[ "Item B" ] ]`	| Create a ordered list with two list items.	|
-| `H.span(style="color: black;")[ "Test" ]`	| Create a span tag with style information and text "`Test`"	|
-| `H.span(_style="color: black;")[ "Test" ]`	| Create a span tag with style information and text "`Test`"	|
-| `H.span(_class="sth")[ "Test" ]`	| Create a span tag with assigned CSS-class "`sth`" and text "`Test`"	|
+| Example                                      | Comment                                                                                    |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `H.a(href="http://example.org")`             | Create a link tag referring to `http://example.org`                                        |
+| `H.a(href="http://example.org")["Test"]`     | Create a link tag referring to `http://example.org` and text `Test`                        |
+| `H.a["Test"]`                                | Create a link tag with text "`Test`"                                                       |
+| `H.a()["Test"]`                              | Create a link tag with text "`Test`"                                                       |
+| `H.a()[]`                                    | Invalid                                                                                    |
+| `H.a()["A ", "great ", "web ", "site"]`      | Create a link tag with text "`A great web site`". (Components are simply concatenated.)    |
+| `H.a()["A ", H.b["great"], " web site"]`     | Create a link tag with text "`A great web site`" where "`great`" is enclosed in a `b`-tag. |
+| `H.ol[ H.li[ "Item A" ], H.li[ "Item B" ] ]` | Create a ordered list with two list items.                                                 |
+| `H.span(style="color: black;")[ "Test" ]`    | Create a span tag with style information and text "`Test`"                                 |
+| `H.span(_style="color: black;")[ "Test" ]`   | Create a span tag with style information and text "`Test`"                                 |
+| `H.span(_class="sth")[ "Test" ]`             | Create a span tag with assigned CSS-class "`sth`" and text "`Test`"                        |
 
 Please note that in regular HTML elements ...
 
